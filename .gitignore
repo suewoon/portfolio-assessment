@@ -1,4 +1,5 @@
-# .csv
+# Custom
+*.log
 *.csv
 
 # Byte-compiled / optimized / DLL files
