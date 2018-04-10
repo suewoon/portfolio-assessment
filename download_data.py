@@ -70,11 +70,16 @@ def write_data_to_csv(symbol, result):
 if __name__ == '__main__':
 	# get args 
 	arg_parser = argparse.ArgumentParser(prog='', description='CLI argument for downloading stock time series data')
-	arg_parser.add_argument('--func', dest='function', help='function for stock time series data, TIME_SERIES_DAILY_ADJUSTED by default', required=False)
-	arg_parser.add_argument('--outputsize', dest='outputsize', help='outputsize, compact(recent 100 data points) or full, full by default', required=False)
+	arg_parser.add_argument('--symbol', dest='symbol', help='stock symbol of which data you want to get, all the stocks listed on NASDAQ will be download by default', required=False)
+	arg_parser.add_argument('--func', dest='function', help='function for stock time series data, TIME_SERIES_DAILY_ADJUSTED by default'
+		, default='full', required=False)
+	arg_parser.add_argument('--outputsize', dest='outputsize', help='outputsize, compact(recent 100 data points) or full, full by default'
+		, default='TIME_SERIES_DAILY_ADJUSTED', required=False)
 	args = arg_parser.parse_args()
-	if outputsize: params['outputsize'] = args.outputsize
-	if function: params['function'] = args.function
+	
+	# set parameters 
+	params['outputsize'] = args.outputsize
+	params['function'] = args.function
 
 	# setup log 
 	setup_logging()
@@ -89,10 +94,14 @@ if __name__ == '__main__':
 			logger.error('Failed to get valid API key', exc_info=True)
 
 	# open listed stock on nasdaq 
-	with open("./nasdaqlisted.txt", 'r') as f:
-		logger.info('Start reading nasdaq list..')
-		stock_listed = f.read()
-	symbols = [line.split('|')[0] for line in stock_listed.split("\n")[1:]]
+	symbol = args.symbol
+	if not symbol:
+		with open("./nasdaqlisted.txt", 'r') as f:
+			logger.info('Start reading nasdaq list..')
+			stock_listed = f.read()
+		symbols = [line.split('|')[0] for line in stock_listed.split("\n")[1:]]
+	else:
+		symbols = [symbol.lower()]
 
 	# split all the stocks into a chunk unit
 	ind = list(range(0, len(symbols), len(symbols)//100))

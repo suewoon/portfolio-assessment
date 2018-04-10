@@ -24,6 +24,7 @@ source ~/.bash_profile
 ``` 
 ### 2. Download data 
 #### 2-1. Download Stock Time Series 
+
 This will download time series data by each symbol and save it as a csv file to `prices/[FUNCTION]/` directory. 
 Without any arguments, it downloads `TIME_SERIES_DAILY_ADJUSTED` data in full. 
 ```
@@ -32,14 +33,16 @@ python download_data.py
 Available functions: TIME_SERIES_INTRADAY, TIME_SERIES_DAILY, TIME_SERIES_DAILY_ADJUSTED, TIME_SERIES_WEEKLY,
 TIME_SERIES_WEEKLY_ADJUSTED, TIME_SERIES_MONTHLY, TIME_SERIES_MONTHLY_ADJUSTED
 ```
-usage: [-h] [--func FUNCTION] [--outputsize OUTPUTSIZE]
+usage: [-h] [--symbol SYMBOL] [--func FUNCTION] [--outputsize OUTPUTSIZE]
 
 CLI argument for downloading stock time series data
 
 optional arguments:
   -h, --help            show this help message and exit
+  --symbol SYMBOL       stock symbol of which data you want to get, all the
+                        stocks listed on NASDAQ will be download by default
   --func FUNCTION       function for stock time series data,
-                        TIME_SERIES_DAILY_ADJUSTED by defult
+                        TIME_SERIES_DAILY_ADJUSTED by default
   --outputsize OUTPUTSIZE
                         outputsize, compact(recent 100 data points) or full,
                         full by default
