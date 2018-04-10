@@ -3,7 +3,8 @@ Stock Price Analysis
 [Alpha Vantage](https://www.alphavantage.co/) offers free api calls which enables to fetch financial data such as stock time series and numerous technical indicators. This repository contains a python script which can download stock time series data as a .csv file format in the disk. 
 
 ## Install
-### 1. Clone the repo 
+### 
+1. Clone the repo 
 ```
 git clone https://github.com/suewoon/stock-price-analysis.git
 ``` 
@@ -18,8 +19,7 @@ We'll use [Alpha Advantage API](https://www.alphavantage.co/documentation/). It'
 Get your free api key [here](https://www.alphavantage.co/support/#api-key) and set your environment variable.  
 ```
 vim ~/.bash_profile
-export AL
-HPHA_ADVANTAGE_KEY=your-api-key-here
+export ALHPHA_ADVANTAGE=your-api-key-here
 source ~/.bash_profile
 ``` 
 ### 2. Download data 

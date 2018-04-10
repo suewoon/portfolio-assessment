@@ -60,9 +60,9 @@ class AlphaVantageData(object):
 				for idx, col_name in enumerate(headers):	# parse data
 					values = [p[idx] for p in rows[1:]]
 					if idx == 0:	# timestamp type 
-						values = [float(v) for v in values]
-					else:	# float type 
 						values = [parse(v) for v in values]
+					else:	# float type 
+						values = [float(v) for v in values]
 					column_data[col_name] = values
 			prices_columnwise[symbol] = column_data
 		except Exception as e:
